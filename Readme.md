@@ -1,3 +1,11 @@
+<p align="center" style="display: flex; justify-content: space-around; align-items: center;">
+  <img src="https://nodejs.org/static/images/logo.svg" alt="Node.js" width="100">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript" width="50" style="margin-right: 20px;">
+  <img src="https://sequelize.org/img/logo.svg" alt="Sequelize" width="50" style="margin-right: 20px;">
+</p>
+
+
+
 # Rick and Morty Character Database
 
 This project integrates seamlessly with the Rick and Morty API to efficiently manage character data, ensuring robust performance and reliability in a PostgreSQL database environment. It encompasses comprehensive functionalities tailored for modern data handling needs:
