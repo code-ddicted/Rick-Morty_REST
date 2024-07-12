@@ -1,0 +1,15 @@
+{
+  "development": {
+    "username": "candidate",
+    "password": "62I8anq3cFq5GYh2u4Lh",
+    "database": "db1",
+    "host": "rc1b-r21uoagjy1t7k77h.mdb.yandexcloud.net",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "rejectUnauthorized": true,
+        "ca": fs.readFileSync("/home/<home directory>/.postgresql/root.crt").toString()
+      }
+    }
+  }
+}
