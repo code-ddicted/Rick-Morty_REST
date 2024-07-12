@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",  // Start your application
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sequelize": "sequelize",  // Shortcut to run Sequelize CLI locally
+    "db:migrate": "npm run sequelize -- db:migrate",  // Run migrations
+    "db:migrate:undo": "npm run sequelize -- db:migrate:undo",  // Undo the last migration
+    "db:migrate:undo:all": "npm run sequelize -- db:migrate:undo:all",  // Revert all migrations
+    "db:seed:all": "npm run sequelize -- db:seed:all",  // Seed the database
+    "db:seed:undo": "npm run sequelize -- db:seed:undo"  // Undo seed data
   },
   "keywords": [],
   "author": "",
