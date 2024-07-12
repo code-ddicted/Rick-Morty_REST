@@ -4,14 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "sequelize": "sequelize",
-    "db:migrate": "npm run sequelize -- db:migrate",
-    "db:migrate:undo": "npm run sequelize -- db:migrate:undo",
-    "db:migrate:undo:all": "npm run sequelize -- db:migrate:undo:all",
-    "db:seed:all": "npm run sequelize -- db:seed:all",
-    "db:seed:undo": "npm run sequelize -- db:seed:undo",
-    "postinstall": "npm run db:migrate"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
