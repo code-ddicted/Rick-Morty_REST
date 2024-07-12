@@ -1,7 +1,6 @@
 const axios = require('axios');
 const retry = require('async-retry');
-
-const db = require('../models')
+const db = require('../models');
 const { DataTypes } = require('sequelize');
 
 const Character = db.sequelize.define('Character', {
@@ -17,42 +16,45 @@ const Character = db.sequelize.define('Character', {
     data: {
         type: DataTypes.JSONB,
         allowNull: false,
-        defaultValue: {} // Example default value for JSONB field
+        defaultValue: {}
     }
 }, {
-    tableName: 'code-ddicted' // Specify the table name explicitly
+    tableName: 'code-ddicted'
 });
 
 async function fetchCharacters() {
-  let page = 1;
-  let characters = [];
+    let page = 1;
+    const characters = [];
 
-  try {
-    let response; // Define response variable outside the do-while loop
+    try {
+        await retry(async () => {
+            let response;
+            do {
+                response = await axios.get(`https://rickandmortyapi.com/api/character?page=${page}`);
+                response.data.results.forEach(character => {
+                    characters.push({
+                        id: character.id,
+                        name: character.name,
+                        data: character
+                    });
+                });
+                page++;
+            } while (response.data.info.next !== null)
+        }, {
+            retries: 3,
+            // Retry settings...
+        });
 
-    // Fetch characters from API until no more pages are available
-    do {
-      response = await axios.get(`https://rickandmortyapi.com/api/character?page=${page}`);
-      const results = response.data.results;
+        await db.sequelize.transaction(async (transaction) => {
+            await Character.bulkCreate(characters, { ignoreDuplicates: false, transaction });
+        });
 
-      // Iterate through characters on current page
-      for (const character of results) {
-                const { id, name } = character;
-                await Character.create({ id, name, data:{} }); // Store character in the database
-                console.log(`Character ID ${id} stored successfully.`);
-            }
+        console.log('All characters stored successfully.');
 
-      characters.push(...results);
-      page++;
-
-    } while (characters.length < response.data.info.count);
-
-    console.log('All characters stored successfully.');
-
-  } catch (error) {
-    console.error('Error fetching and storing characters:', error.message);
-    // Handle error appropriately
-  }
+    } catch (error) {
+        console.error('Error fetching characters:', error.message);
+    }
 }
 
+// Call the function to start fetching characters
 module.exports = fetchCharacters;

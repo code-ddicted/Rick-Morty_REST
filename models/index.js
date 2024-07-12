@@ -5,8 +5,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 // Read CA certificate
-const caCert = fs.readFileSync(path.join(__dirname, '..', 'root.crt')).toString();
-
+//const caCert = fs.readFileSync(path.join(__dirname, '..', 'root.crt')).toString();
+const caCert = 'https://storage.yandexcloud.net/cloud-certs/CA.pem';
 
 // Define the connection string
 const connectionString = process.env.CONNECTION ;
@@ -17,7 +17,7 @@ const sequelize = new Sequelize(connectionString, {
   dialectOptions: {
     ssl: {
       require: true,
-      rejectUnauthorized: true,
+      rejectUnauthorized: false,
       ca: caCert
     }
   },

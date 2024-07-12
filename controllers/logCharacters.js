@@ -7,11 +7,11 @@ async function logCharacters() {
     const characters = await Character.findAll();
     
     if (characters.length === 0) {
-      console.log('Empty');
+      console.log('code-ddicted table empty');
     } else {
       // Log characters
       characters.forEach(character => {
-        console.log(`Character ID: ${character.id}, Name: ${character.name}, Data: ${JSON.stringify(character.data)}`);
+        console.log(`Character ID: ${character.id}, Name: ${character.name}`);
       });
     }
 

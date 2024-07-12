@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     data: {
         type: DataTypes.JSONB,
-        allowNull: false,
+        allowNull: true,
         defaultValue: {} // Example default value for JSONB field
     }
     }, {
